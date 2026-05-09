@@ -12,11 +12,7 @@ import java.util.Map;
 public class ShopManager {
 
     private final ShopPlugin plugin;
-
-    // Material -> sell price (coins per item when using /sellhand)
     private final Map<Material, Double> sellPrices = new HashMap<>();
-
-    // Ordered list of items available in the /shop GUI
     private final List<ShopItem> shopItems = new ArrayList<>();
 
     public ShopManager(ShopPlugin plugin) {
@@ -28,7 +24,6 @@ public class ShopManager {
         sellPrices.clear();
         shopItems.clear();
 
-        // Load sell prices
         ConfigurationSection sellSection = plugin.getConfig().getConfigurationSection("sell-prices");
         if (sellSection != null) {
             for (String key : sellSection.getKeys(false)) {
@@ -41,15 +36,16 @@ public class ShopManager {
             }
         }
 
-        // Load shop items
         List<?> rawList = plugin.getConfig().getList("shop-items");
         if (rawList != null) {
             for (Object obj : rawList) {
-                if (obj instanceof Map<?, ?> map) {
+                if (obj instanceof Map<?, ?> rawMap) {
+                    @SuppressWarnings("unchecked")
+                    Map<String, Object> map = (Map<String, Object>) rawMap;
                     String matStr = (String) map.get("material");
-                    String name = (String) map.getOrDefault("name", matStr);
-                    double buyPrice = ((Number) map.getOrDefault("buy-price", 0.0)).doubleValue();
-
+                    String name = map.containsKey("name") ? (String) map.get("name") : matStr;
+                    Object priceObj = map.get("buy-price");
+                    double buyPrice = priceObj instanceof Number ? ((Number) priceObj).doubleValue() : 0.0;
                     Material mat = Material.matchMaterial(matStr != null ? matStr : "");
                     if (mat != null) {
                         shopItems.add(new ShopItem(mat, name, buyPrice));
@@ -78,12 +74,8 @@ public class ShopManager {
     }
 
     public void addShopItem(Material material, String name, double buyPrice) {
-        // Remove existing entry if present
         shopItems.removeIf(item -> item.getMaterial() == material);
-
         shopItems.add(new ShopItem(material, name, buyPrice));
-
-        // Persist to config
         List<Map<String, Object>> serialized = new ArrayList<>();
         for (ShopItem item : shopItems) {
             Map<String, Object> map = new HashMap<>();
@@ -113,9 +105,6 @@ public class ShopManager {
         return removed;
     }
 
-    // -------------------------
-    //  Inner class: ShopItem
-    // -------------------------
     public static class ShopItem {
         private final Material material;
         private final String displayName;
