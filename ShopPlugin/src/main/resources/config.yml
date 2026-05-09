@@ -1,0 +1,69 @@
+# ShopPlugin Configuration
+# Sell prices: how much coins a player gets for selling 1 of that item
+# Buy prices: how much coins it costs to buy 1 of that item from /shop
+
+sell-prices:
+  DIAMOND: 250.0
+  EMERALD: 150.0
+  GOLD_INGOT: 30.0
+  IRON_INGOT: 15.0
+  COAL: 5.0
+  OAK_LOG: 3.0
+  WHEAT: 2.0
+  COBBLESTONE: 1.0
+  SAND: 1.0
+  GRAVEL: 1.0
+  BONE: 4.0
+  STRING: 3.0
+  LEATHER: 8.0
+  ROTTEN_FLESH: 1.0
+  GUNPOWDER: 10.0
+  BLAZE_ROD: 20.0
+  ENDER_PEARL: 25.0
+  NETHERITE_INGOT: 1000.0
+
+# Shop items for /shop GUI: material, display name, buy price
+shop-items:
+  - material: IRON_INGOT
+    name: "Iron Ingot"
+    buy-price: 20.0
+  - material: GOLD_INGOT
+    name: "Gold Ingot"
+    buy-price: 40.0
+  - material: DIAMOND
+    name: "Diamond"
+    buy-price: 300.0
+  - material: COAL
+    name: "Coal"
+    buy-price: 8.0
+  - material: OAK_LOG
+    name: "Oak Log"
+    buy-price: 5.0
+  - material: WHEAT
+    name: "Wheat"
+    buy-price: 3.0
+  - material: BREAD
+    name: "Bread"
+    buy-price: 10.0
+  - material: COOKED_BEEF
+    name: "Steak"
+    buy-price: 15.0
+  - material: BONE
+    name: "Bone"
+    buy-price: 6.0
+  - material: ENDER_PEARL
+    name: "Ender Pearl"
+    buy-price: 35.0
+  - material: BLAZE_ROD
+    name: "Blaze Rod"
+    buy-price: 30.0
+  - material: GUNPOWDER
+    name: "Gunpowder"
+    buy-price: 15.0
+
+# Starting balance for new players
+starting-balance: 100.0
+
+# Currency name (display only)
+currency-name: "Coins"
+currency-symbol: "$"

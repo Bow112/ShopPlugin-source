@@ -1,0 +1,42 @@
+name: ShopPlugin
+version: 1.0.0
+main: com.example.shopplugin.ShopPlugin
+api-version: 1.21
+description: Sell items with /sellhand and buy from /shop
+authors: [YourName]
+
+commands:
+  sellhand:
+    description: Sell the item you are holding
+    usage: /sellhand [amount]
+    aliases: [sell]
+  shop:
+    description: Open the player shop
+    usage: /shop
+  balance:
+    description: Check your coin balance
+    usage: /balance
+    aliases: [bal, coins]
+  setprice:
+    description: Set the sell price for the item you are holding
+    usage: /setprice <price>
+  addshopitem:
+    description: Add the item you are holding to the shop with a buy price
+    usage: /addshopitem <buyPrice>
+  removeshopitem:
+    description: Remove an item from the shop by material name
+    usage: /removeshopitem <material>
+
+permissions:
+  shopplugin.sell:
+    description: Allows use of /sellhand
+    default: true
+  shopplugin.shop:
+    description: Allows use of /shop
+    default: true
+  shopplugin.balance:
+    description: Allows use of /balance
+    default: true
+  shopplugin.admin:
+    description: Allows admin commands like /setprice and /addshopitem
+    default: op
